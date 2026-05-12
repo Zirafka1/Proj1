@@ -9,21 +9,24 @@ HEIGHT = 700
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Pohyb lodicky")
 
+# Hodiny pro hlídání FPS
 clock = pygame.time.Clock()
 
-barvy
+#BARVY
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 BLUE = (0, 150, 255)
 RED = (255, 0, 0)
 
-lodicka
+# --- OBJEKT HRÁČE (LODIČKA) ---
 ship = pygame.Rect(225, 620, 50, 50)
 ship_speed = 6
 
-strely
+#STRELY
 bullets = []
 bullet_speed = 8
+
+#HLAVNÍ HERNÍ SMYČKA
 
 while True:
     screen.fill(BLACK)
@@ -36,7 +39,7 @@ while True:
             if event.key == pygame.K_SPACE:
                 bullet = pygame.Rect(ship.centerx - 3, ship.y, 6, 15)
                 bullets.append(bullet)
-
+    #POHYB LODIČKY
     keys = pygame.key.get_pressed()
 
 
@@ -60,9 +63,10 @@ while True:
         if bullet.y < 0:
             bullets.remove(bullet)
 
-
+    # Vykreslení modrého těla lodě
     pygame.draw.rect(screen, BLUE, ship)
-
+    
+    # Vykreslení bílé plachty
     pygame.draw.polygon(
         screen,
         WHITE,
@@ -73,7 +77,7 @@ while True:
         ]
     )
 
-
+    # Vykreslení všech aktivních střel
     for bullet in bullets:
         pygame.draw.rect(screen, RED, bullet)
 
